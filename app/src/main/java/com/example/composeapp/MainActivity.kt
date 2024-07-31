@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -104,49 +105,64 @@ fun TaskManager(modifier: Modifier = Modifier) {
 @Composable
 fun Quadrants(modifier: Modifier = Modifier) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Row {
-            Column(modifier = Modifier.background(Color(0xFFEADDFF))) {
-                Text(
-                    text = "Text composable\n",
-                    fontWeight = FontWeight.Bold,
-                    modifier = modifier.padding(0.dp, 16.dp)
-                )
-                Text(
-                    text = "Displays text and follows the recommended Material Design guidelines.\n"
-                )
-            }
-            Column(modifier = Modifier.background(Color(0xFFD0BCFF))) {
-                Text(
-                    text = "Image composable\n",
-                    fontWeight = FontWeight.Bold,
-                    modifier = modifier.padding(0.dp, 16.dp)
-                )
-                Text(
-                    text = "Creates a composable that lays out and draws a given Painter class object."
-                )
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Quadrant(
+                backgroundColor = Color(0xFFEADDFF),
+                title = "Text composable",
+                description = "Displays text and follows the recommended Material Design guidelines.",
+                modifier = Modifier.weight(1f)
+            )
+            Quadrant(
+                backgroundColor = Color(0xFFD0BCFF),
+                title = "Image composable",
+                description = "Creates a composable that lays out and draws a given Painter class object.",
+                modifier = Modifier.weight(1f)
+            )
         }
-        Row {
-            Column(modifier = Modifier.background(Color(0xFFB69DF8))) {
-                Text(
-                    text = "Row composable",
-                    fontWeight = FontWeight.Bold,
-                    modifier = modifier.padding(0.dp, 16.dp)
-                )
-                Text(
-                    text = "A layout composable that places its children in a horizontal sequence."
-                )
-            }
-            Column(modifier = Modifier.background(Color(0xFFF6EDFF))) {
-                Text(
-                    text = "Column composable",
-                    fontWeight = FontWeight.Bold,
-                    modifier = modifier.padding(0.dp, 16.dp)
-                )
-                Text(
-                    text = "A layout composable that places its children in a vertical sequence."
-                )
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            Quadrant(
+                backgroundColor = Color(0xFFB69DF8),
+                title = "Row composable",
+                description = "A layout composable that places its children in a horizontal sequence.",
+                modifier = Modifier.weight(1f)
+            )
+            Quadrant(
+                backgroundColor = Color(0xFFF6EDFF),
+                title = "Column composable",
+                description = "A layout composable that places its children in a vertical sequence.",
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+@Composable
+fun Quadrant(
+    backgroundColor: Color,
+    title: String,
+    description: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .background(backgroundColor)
+            .padding(16.dp)
+    ) {
+        Column {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Text(text = description)
         }
     }
 }
@@ -156,5 +172,13 @@ fun Quadrants(modifier: Modifier = Modifier) {
 fun ArticlePreview() {
     ComposeAppTheme {
         Article()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun QuadrantsPreview() {
+    ComposeAppTheme {
+        Quadrants()
     }
 }
