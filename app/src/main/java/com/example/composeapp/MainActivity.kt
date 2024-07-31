@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign.Companion.Justify
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,7 +30,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Article(
+                    /*Article(
+                        modifier = Modifier.padding(innerPadding)
+                    )*/
+                    TaskManager(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -40,6 +46,12 @@ class MainActivity : ComponentActivity() {
 fun ArticleImage(modifier: Modifier = Modifier) {
     val image = painterResource(R.drawable.bg_compose_background)
     Image(painter = image, contentDescription = "Background")
+}
+
+@Composable
+fun TaskImage(modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.ic_task_completed)
+    Image(painter = image, contentDescription = "Task completed")
 }
 
 @Composable
@@ -63,6 +75,23 @@ fun Article(modifier: Modifier = Modifier) {
         )
     }
 
+}
+
+@Composable
+fun TaskManager(modifier: Modifier = Modifier) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
+        TaskImage()
+        Text(
+            text = "All tasks completed",
+            fontWeight = FontWeight.Bold,
+            modifier = modifier.padding(24.dp, 8.dp))
+        Text(
+            text = "Nice work!",
+            fontSize = 16.sp)
+    }
 }
 
 @Preview(showBackground = true)
